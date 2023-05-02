@@ -1,6 +1,7 @@
 import React from 'react';
 import coverPic from "../../assets/cover.jpg"
 import { FaBeer, FaBook, FaFish, FaPeopleArrows, FaQuestion } from "react-icons/fa";
+import Services from '../Services/Services';
 
 
 const Home = () => {
@@ -58,6 +59,7 @@ const Home = () => {
                 </div>
             </div>
             {/* second section  */}
+            <Services></Services>
 
 
         </div>
