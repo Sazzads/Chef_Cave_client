@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Services = () => {
     const [chefData, setChefData] = useState([])
 
-    fetch("http://localhost:5000/allchefs")
+    fetch("https://server-site-pi.vercel.app/allchefs")
         .then(res => res.json())
         .then(data => setChefData(data))
     // console.log(chefData);

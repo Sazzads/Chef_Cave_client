@@ -38,7 +38,7 @@ const router = createBrowserRouter([
             {
                 path: '/servicedetails/:id',
                 element: <ServiceDetails></ServiceDetails>,
-                loader:({params})=>fetch(`http://localhost:5000/allfoods/${params.id}`)
+                loader:({params})=>fetch(`https://server-site-pi.vercel.app/allfoods/${params.id}`)
             },
 
         ]

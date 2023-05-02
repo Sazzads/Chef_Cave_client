@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../providers/AuthProvider';
 
 const Menubar = () => {
+    const { user } = useContext(AuthContext)
     return (
         <div className="navbar bg-base-100">
             <div className="navbar-start">
@@ -14,7 +16,7 @@ const Menubar = () => {
                         <li><Link to="/blog">Blog</Link></li>
                     </ul>
                 </div>
-                <a className="btn btn-ghost normal-case text-xl">FooD Cave</a>
+                <a className="btn btn-ghost normal-case text-4xl">FooD Cave</a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -23,13 +25,21 @@ const Menubar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn me-1">Login</a>
-                <a className="btn me-1">Register</a>
-                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                    <div className="w-10 rounded-full">
-                        <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                    </div>
-                </label>
+                <p>{user.displayName}</p>
+
+                <Link to='/register' className="btn me-1">Register</Link>
+                {user ?
+                    <Link className="btn me-1">LogOut</Link> :
+                    <Link to='/login' className="btn me-1">Login</Link>
+                }
+
+                {user &&
+                    <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                        <div className="w-10 rounded-full">
+                            <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                        </div>
+                    </label>
+                }
             </div>
         </div>
     );

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Rating } from '@smastrom/react-rating'
 import { useLoaderData, useParams } from 'react-router-dom';
 import '@smastrom/react-rating/style.css';
-import {  FaHeart} from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 
 
 const ServiceDetails = () => {
@@ -13,43 +13,55 @@ const ServiceDetails = () => {
     const { rating } = chef
 
     useEffect(() => {
-        fetch(`http://localhost:5000/allchefs/${id}`)
+        fetch(`https://server-site-pi.vercel.app/allchefs/${id}`)
             .then(res => res.json())
             .then(data => setChef(data))
     }, [])
 
     return (
         <div className='my-container'>
+                        <div className="carousel w-full">
+                <div id="slide1" className="carousel-item relative w-full">
+                    <img src={chef.img} className="w-full" />
+                </div>
+            </div>
 
             <div className='chef-details'>
                 <div className="card w-100 bg-base-100 shadow-xl">
-                    <figure><img src={chef.img} alt="Shoes" /></figure>
                     <div className="card-body">
                         <h2 className="text-2xl text-center">{chef.name}</h2>
                         <p className='text-center'>{chef.bio}</p>
-                        <p className='text-center'>Likes: {chef.Likes}</p>
-
-                        <div className="card-actions justify-center">
-                        <Rating style={{ maxWidth: 150 }} value={Math.round(rating?.number || 0)} readOnly></Rating>
-                        <span className='text-1xl'>Rating:{rating?.number}</span>
-                        
-                        </div>
-                        <div className='card-actions justify-center mt-2'>
-                        <button className='btn bg-red-600'>Add To Favourite</button>
-                        </div>
-
-
+                        <p className='text-center text-xl'>Likes: {chef.Likes}</p>
+                        <p className='text-center text-xl'>experience: {chef.experience}</p>
                     </div>
 
                 </div>
             </div>
-            <div className='recepie'>
+            <div className='grid grid-cols-1 md:grid-cols-3 '>
 
+                {
+                    foodrecipe.map(recipe => <div key={recipe.food_id} className="card w-96 bg-neutral text-neutral-content m-4">
+                        <div className="card-body items-center text-center">
+                            <h2 className="card-title">{recipe.name}</h2>
+                            <div>
+                                <h3>Ingredients</h3>
+                                <p>{recipe.ingredients.a}</p>
+                                <p>{recipe.ingredients.b}</p>
+                                <p>{recipe.ingredients.c}</p>
+                                <p>{recipe.ingredients.d}</p>
+                                <p>{recipe.ingredients.e}</p>
+                            </div>
+                            <p>{recipe.cookingMethod}</p>
+
+                            <div className="card-actions justify-center">
+                                <Rating style={{ maxWidth: 150 }} value={Math.round(recipe.rating?.number || 0)} readOnly></Rating>
+                                <span className='text-1xl'>Rating:{recipe.rating?.number}</span>
+                                <button className='btn bg-red-600'>Add To Favourite</button>
+                            </div>
+                        </div>
+                    </div>)
+                }
             </div>
-            <h2>services details:{foodrecipe.length}</h2>
-            {
-                foodrecipe.map(recipe => <p key={recipe.food_id}>{recipe.name}</p>)
-            }
         </div>
     );
 };
