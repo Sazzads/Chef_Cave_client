@@ -23,7 +23,7 @@ const Services = () => {
                             <p>{chef.experience} Expericence</p>
                             <p>{chef.recipeNumber} Recipies</p>
                             <div className="card-actions justify-end">
-                                <div className="btn bg-yellow-400 text-black hover">View Recipies</div>
+                                <div className="btn bg-yellow-400 text-black hover:text-white">View Recipies</div>
                             </div>
                         </div>
                     </div>

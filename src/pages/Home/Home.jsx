@@ -61,6 +61,71 @@ const Home = () => {
             {/* second section  */}
             <Services></Services>
 
+            {/* contact us section  */}
+            <section className=" py-12">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="lg:text-center">
+                        <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl">
+                            Contact Us
+                        </p>
+                        <p className="mt-4 max-w-2xl text-xl lg:mx-auto">
+                            You can also leave feedback or ask questions through these channels. Youll receive valuable information about your customers preferences and expectations if done correctly.
+                        </p>
+                        <div className="mt-10 flex justify-center">
+                            <div className="w-full max-w-lg">
+                                <form className="grid grid-cols-1 gap-6">
+                                    <div className="rounded-md shadow-sm">
+                                        <label htmlFor="name" className="block text-sm font-medium ">
+                                            Full name
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="name"
+                                            id="name"
+                                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                            placeholder="Enter your full name"
+                                        />
+                                    </div>
+                                    <div className="rounded-md shadow-sm">
+                                        <label htmlFor="email" className="block text-sm font-medium ">
+                                            Email address
+                                        </label>
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            id="email"
+                                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                            placeholder="Enter your email address"
+                                        />
+                                    </div>
+                                    <div className="rounded-md shadow-sm">
+                                        <label htmlFor="message" className="block text-sm font-medium ">
+                                            Message
+                                        </label>
+                                        <textarea
+                                            name="message"
+                                            id="message"
+                                            rows="4"
+                                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                            placeholder="Enter your message"
+                                        ></textarea>
+                                    </div>
+                                    <div className="rounded-md shadow">
+                                        <button
+                                            type="submit"
+                                            className="inline-flex justify-center py-2 px-4 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                        >
+                                            Submit
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            {/* contact us section  */}
+
 
         </div>
     );
