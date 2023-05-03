@@ -1,16 +1,18 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, getRedirectResult, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, signOut } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, getRedirectResult, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, signOut } from "firebase/auth";
 import app from '../firebase/firebase.config';
 
 export const AuthContext = createContext(null)
 
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
+const gitProvider=new GithubAuthProvider();
 
 
 
 
 const AuthProvider = ({ children }) => {
+
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -18,18 +20,18 @@ const AuthProvider = ({ children }) => {
         setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password);
     }
-    //google regi
+    //google registation
     const createUserGoogle = () => {
         setLoading(true);
         return signInWithPopup(auth, provider);
 
     }
-    //google sign in
+ //github registation
+ const createUserGit=()=>{
+    setLoading(true);
+    return signInWithPopup(auth,gitProvider);
 
-    // const googleSignIn = () => {
-    //     setLoading(true);
-    //     return getRedirectResult(auth)
-    // }
+ }
 
 
     const signIn = (email, password) => {
@@ -60,6 +62,7 @@ const AuthProvider = ({ children }) => {
         signIn,
         logOut,
         createUserGoogle,
+        createUserGit
       
     }
     return (

@@ -4,7 +4,7 @@ import { AuthContext } from '../../providers/AuthProvider';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
 
 const Register = () => {
-    const { creteUser,createUserGoogle } = useContext(AuthContext)
+    const { creteUser,createUserGoogle,createUserGit } = useContext(AuthContext)
     const [error, setError] = useState("")
     const [success, setSuccess] = useState("")
 
@@ -43,6 +43,19 @@ const Register = () => {
 
     const handleGoogleLogin=(auth,provider)=>{
         createUserGoogle(auth,provider)
+        .then(result=>{
+            const user=result.user;
+            console.log(user);
+
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+
+    }
+
+    const handleGitLogin=(auth,gitProvider)=>{
+        createUserGit(auth,gitProvider)
         .then(result=>{
             const user=result.user;
             console.log(user);
@@ -123,7 +136,7 @@ const Register = () => {
             <div className=' max-w-sm mx-auto mt-8'>
                 <div className="grid grid-cols-2 gap-4 mb-10">
                     <button onClick={handleGoogleLogin} className="btn"><FaGoogle className='me-3 '></FaGoogle > Google</button>
-                    <button className="btn"><FaGithub className='me-3 '></FaGithub>GitHub</button>
+                    <button onClick={handleGitLogin} className="btn"><FaGithub className='me-3 '></FaGithub>GitHub</button>
                 </div>
             </div>
         </div>

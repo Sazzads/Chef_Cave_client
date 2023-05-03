@@ -8,7 +8,7 @@ import { getAuth, signInWithRedirect, getRedirectResult, GoogleAuthProvider } fr
 
 
 const Login = () => {
-    const { signIn,createUserGoogle } = useContext(AuthContext);
+    const { signIn,createUserGoogle,createUserGit } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     // console.log('login page location', location);
@@ -52,6 +52,21 @@ const Login = () => {
             .catch(error => {
                 console.log(error);
             })
+    }
+
+    const handleGitLogin=(auth,gitProvider)=>{
+        createUserGit(auth,gitProvider)
+        .then(result=>{
+            const user=result.user;
+            console.log(user);
+            navigate(from, { replace: true });
+
+
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+
     }
     return (
         <div>
@@ -97,7 +112,7 @@ const Login = () => {
             <div className=' max-w-sm mx-auto mt-8'>
                 <div className="grid grid-cols-2 gap-4 mb-10">
                     <button onClick={handleGoogleSignIn} className="btn"><FaGoogle className='me-3 '></FaGoogle > Google</button>
-                    <button className="btn"><FaGithub className='me-3 '></FaGithub>GitHub</button>
+                    <button onClick={handleGitLogin} className="btn"><FaGithub className='me-3 '></FaGithub>GitHub</button>
                 </div>
             </div>
         </div>
