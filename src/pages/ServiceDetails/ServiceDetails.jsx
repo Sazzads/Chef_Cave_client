@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Rating } from '@smastrom/react-rating'
 import { useLoaderData, useParams } from 'react-router-dom';
 import '@smastrom/react-rating/style.css';
-import { FaHeart } from "react-icons/fa";
+
 
 
 const ServiceDetails = () => {
@@ -26,6 +26,7 @@ const ServiceDetails = () => {
                         <div className="carousel w-full">
                 <div id="slide1" className="carousel-item relative w-full">
                     <img src={chef.img} className="w-full" />
+                    
                 </div>
             </div>
 

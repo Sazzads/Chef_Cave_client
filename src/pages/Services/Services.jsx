@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import LazyLoad from 'react-lazy-load';
+
 
 const Services = () => {
     const [chefData, setChefData] = useState([])
@@ -15,7 +17,8 @@ const Services = () => {
             <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
                 {
                     chefData.map(chef => <div key={chef.id} className="card w-96 bg-base-100 shadow-xl hover:bg-gray-500">
-                        <figure><img src={chef.img} alt="Shoes" /></figure>
+                
+                        <figure><LazyLoad threshold={0.55}><img src={chef.img} alt="chef" /></LazyLoad></figure>
                         <div className="card-body">
                             <h2 className="card-title">
                                 {chef.name}
