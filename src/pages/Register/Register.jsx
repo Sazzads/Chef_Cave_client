@@ -4,31 +4,60 @@ import { AuthContext } from '../../providers/AuthProvider';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
 
 const Register = () => {
-    const {creteUser}=useContext(AuthContext)
+    const { creteUser,createUserGoogle } = useContext(AuthContext)
+    const [error, setError] = useState("")
+    const [success, setSuccess] = useState("")
+
 
     const handleRegister = (event) => {
         event.preventDefault();
-        const form=event.target;
-        const name=form.name.value;
-        const photo=form.photo.value;
-        const email=form.email.value;
-        const password=form.password.value;
-        console.log(name,photo,email,password);
-        
-        creteUser(email,password)
+        setError('')
+        const form = event.target;
+        const name = form.name.value;
+        const photo = form.photo.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(name, photo, email, password);
+
+        if (password.length < 6) {
+            setError('Please add at least 6 cherecters');
+            return;
+        }
+
+        creteUser(email, password)
+            .then(result => {
+                const createdUser = result.user
+                console.log(createdUser);
+                setError('')
+                event.target.reset();
+                setSuccess("REGISTER COMPLETE SUCCESSFULLY")
+            })
+            .catch(error => {
+                console.log(error);
+                setError(error.message);
+                setSuccess('')
+            })
+
+    };
+
+
+    const handleGoogleLogin=(auth,provider)=>{
+        createUserGoogle(auth,provider)
         .then(result=>{
-            const createdUser=result.user
-            console.log(createdUser);
+            const user=result.user;
+            console.log(user);
+
         })
         .catch(error=>{
             console.log(error);
         })
-        
-    };
+
+    }
     return (
-        <div>       
+        <div>
+            <h1 className=' text-green-700 text-center font-bold text-3xl my-4'>{success}</h1>
             <form className="max-w-sm mx-auto mt-8 " onSubmit={handleRegister}>
-            <h2 className='text-3xl mb-5'>Please register</h2>
+                <h2 className='text-3xl mb-5'>Please register</h2>
                 <div className="mb-4">
                     <label htmlFor="name" className="block  font-bold mb-2">
                         Name
@@ -61,8 +90,8 @@ const Register = () => {
                         type="email"
                         id="email"
                         className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
-                       name='email'
-                       required
+                        name='email'
+                        required
                     />
                 </div>
                 <div className="mb-6">
@@ -77,8 +106,9 @@ const Register = () => {
                         required
                     />
                 </div>
-                <p className=' text-red-700'>error</p>
-                <p className='mb-2 text-green-700'>success</p>
+                <p className=' text-red-700 mb-4'>{error}</p>
+
+
                 <div className="flex items-center justify-between">
                     <button
                         type="submit"
@@ -92,7 +122,7 @@ const Register = () => {
             </form>
             <div className=' max-w-sm mx-auto mt-8'>
                 <div className="grid grid-cols-2 gap-4 mb-10">
-                    <button className="btn"><FaGoogle className='me-3 '></FaGoogle > Google</button>
+                    <button onClick={handleGoogleLogin} className="btn"><FaGoogle className='me-3 '></FaGoogle > Google</button>
                     <button className="btn"><FaGithub className='me-3 '></FaGithub>GitHub</button>
                 </div>
             </div>

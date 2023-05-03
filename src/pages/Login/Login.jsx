@@ -1,26 +1,53 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 
+import { getAuth, signInWithRedirect, getRedirectResult, GoogleAuthProvider } from "firebase/auth";
+
+
+
 const Login = () => {
-    const { signIn } = useContext(AuthContext);
+    const { signIn,createUserGoogle } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
-    console.log('login page location', location);
-    const from = location.state.from.pathname || '/';
+    // console.log('login page location', location);
+    const from = location.state?.from?.pathname || '/';
+
+    const [error, setError] = useState("")
 
     const handleLogin = (event) => {
         event.preventDefault();
         const form = event.target;
+        setError("");
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
+
+        if (password.length < 6) {
+            setError('Please add at least 6 cherecters');
+            return;
+        }
+
         signIn(email, password)
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
                 navigate(from, { replace: true });
+            })
+            .catch(error => {
+                console.log(error.message);
+                setError(error.message)
+            })
+    }
+
+    const handleGoogleSignIn = (auth,provider) => {
+        createUserGoogle(auth, provider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                navigate(from, { replace: true });
+
             })
             .catch(error => {
                 console.log(error);
@@ -55,8 +82,7 @@ const Login = () => {
                         required
                     />
                 </div>
-                <p className=' text-red-700'>error</p>
-                <p className='mb-2 text-green-700'>success</p>
+                <p className=' text-red-700 mb-4'>{error}</p>
                 <div className="flex items-center justify-between">
                     <button
                         type="submit"
@@ -70,7 +96,7 @@ const Login = () => {
             </form>
             <div className=' max-w-sm mx-auto mt-8'>
                 <div className="grid grid-cols-2 gap-4 mb-10">
-                    <button className="btn"><FaGoogle className='me-3 '></FaGoogle > Google</button>
+                    <button onClick={handleGoogleSignIn} className="btn"><FaGoogle className='me-3 '></FaGoogle > Google</button>
                     <button className="btn"><FaGithub className='me-3 '></FaGithub>GitHub</button>
                 </div>
             </div>
