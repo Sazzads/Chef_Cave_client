@@ -3,7 +3,14 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 
 const Menubar = () => {
-    const { user } = useContext(AuthContext)
+    const { user, logOut } = useContext(AuthContext);
+    const handleLogOut = () => {
+        logOut()
+            .then()
+            .catch(error => {
+                console.log(error);
+            })
+    }
     return (
         <div className="navbar bg-base-100">
             <div className="navbar-start">
@@ -25,11 +32,13 @@ const Menubar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <p>{user.displayName}</p>
+                <p>{user?.displayName}</p>
 
-                <Link to='/register' className="btn me-1">Register</Link>
+                {!user &&
+                    <Link to='/register' className="btn me-1">Register</Link>
+                }
                 {user ?
-                    <Link className="btn me-1">LogOut</Link> :
+                    <Link onClick={handleLogOut} className="btn me-1">LogOut</Link> :
                     <Link to='/login' className="btn me-1">Login</Link>
                 }
 
