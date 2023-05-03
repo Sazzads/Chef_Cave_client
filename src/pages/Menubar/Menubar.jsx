@@ -33,7 +33,7 @@ const Menubar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <p>{user?.displayName}</p>
+                {/* <p>{user?.displayName}</p> */}
 
                 {!user &&
                     <NavLink to='/register' className="btn me-1">Register</NavLink>
