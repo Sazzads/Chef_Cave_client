@@ -12,11 +12,14 @@ const ServiceDetails = () => {
 
     const { rating } = chef
 
+
     useEffect(() => {
         fetch(`https://server-site-pi.vercel.app/allchefs/${id}`)
             .then(res => res.json())
             .then(data => setChef(data))
     }, [])
+
+
 
     return (
         <div className='my-container'>

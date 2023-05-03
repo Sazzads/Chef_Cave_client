@@ -4,15 +4,15 @@ import { AuthContext } from '../../providers/AuthProvider';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
 
 const Register = () => {
-    const { creteUser,createUserGoogle,createUserGit } = useContext(AuthContext)
+    const { creteUser,createUserGoogle,createUserGit,updateUserdata } = useContext(AuthContext)
     const [error, setError] = useState("")
     const [success, setSuccess] = useState("")
-
 
     const handleRegister = (event) => {
         event.preventDefault();
         setError('')
         const form = event.target;
+
         const name = form.name.value;
         const photo = form.photo.value;
         const email = form.email.value;
@@ -30,13 +30,23 @@ const Register = () => {
                 console.log(createdUser);
                 setError('')
                 event.target.reset();
-                setSuccess("REGISTER COMPLETE SUCCESSFULLY")
+                setSuccess("REGISTER COMPLETE SUCCESSFULLY");
+                updateUserdata(result.user,name,photo)
             })
             .catch(error => {
                 console.log(error);
                 setError(error.message);
                 setSuccess('')
             })
+
+            updateUserdata(name,photo)
+            .then(()=>{
+                console.log("username updated");
+            })
+            .catch(error=>{
+                console.log(error);
+            })
+
 
     };
 
@@ -51,7 +61,6 @@ const Register = () => {
         .catch(error=>{
             console.log(error);
         })
-
     }
 
     const handleGitLogin=(auth,gitProvider)=>{
