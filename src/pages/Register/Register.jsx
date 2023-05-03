@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
 
 const Register = () => {
-    const { creteUser,createUserGoogle,createUserGit,updateUserdata } = useContext(AuthContext)
+    const { creteUser, createUserGoogle, createUserGit, updateUserProfile } = useContext(AuthContext)
     const [error, setError] = useState("")
     const [success, setSuccess] = useState("")
 
@@ -31,7 +31,8 @@ const Register = () => {
                 setError('')
                 event.target.reset();
                 setSuccess("REGISTER COMPLETE SUCCESSFULLY");
-                updateUserdata(result.user,name,photo)
+                // updateUserdata(result.user,name,photo)
+                updateUserProfile(name,photo)
             })
             .catch(error => {
                 console.log(error);
@@ -39,40 +40,35 @@ const Register = () => {
                 setSuccess('')
             })
 
-            updateUserdata(name,photo)
-            .then(()=>{
-                console.log("username updated");
-            })
-            .catch(error=>{
-                console.log(error);
-            })
+
+
 
 
     };
 
 
-    const handleGoogleLogin=(auth,provider)=>{
-        createUserGoogle(auth,provider)
-        .then(result=>{
-            const user=result.user;
-            console.log(user);
+    const handleGoogleLogin = (auth, provider) => {
+        createUserGoogle(auth, provider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
 
-        })
-        .catch(error=>{
-            console.log(error);
-        })
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
 
-    const handleGitLogin=(auth,gitProvider)=>{
-        createUserGit(auth,gitProvider)
-        .then(result=>{
-            const user=result.user;
-            console.log(user);
+    const handleGitLogin = (auth, gitProvider) => {
+        createUserGit(auth, gitProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
 
-        })
-        .catch(error=>{
-            console.log(error);
-        })
+            })
+            .catch(error => {
+                console.log(error);
+            })
 
     }
     return (

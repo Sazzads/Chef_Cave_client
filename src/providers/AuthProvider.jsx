@@ -1,7 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, getRedirectResult, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, signOut, updateProfile } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from '../firebase/firebase.config';
-
 export const AuthContext = createContext(null)
 
 const auth = getAuth(app);
@@ -9,9 +8,8 @@ const provider = new GoogleAuthProvider();
 const gitProvider = new GithubAuthProvider();
 
 
-
-
 const AuthProvider = ({ children }) => {
+
 
     const [user, setUser] = useState(null);
 
@@ -20,12 +18,18 @@ const AuthProvider = ({ children }) => {
     const creteUser = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password);
     }
-    const updateUserdata = (users, name,photo) => {
-        
-        return updateProfile(users, { displayName: name,photoURL:photo });
-        setLoading(false);
-
+    const updateUserProfile = (name, photo) => {
+        updateProfile(auth.currentUser, {
+            displayName: name,
+            photoURL: photo
+        }).then(() => {
+            console.log("Profile updated successfully.");
+        }).catch((error) => {
+            console.log("Error updating profile: ", error);
+        });
+        logOut()
     }
+
 
 
     //google registation
@@ -71,7 +75,7 @@ const AuthProvider = ({ children }) => {
         logOut,
         createUserGoogle,
         createUserGit,
-        updateUserdata
+        updateUserProfile
 
     }
     return (

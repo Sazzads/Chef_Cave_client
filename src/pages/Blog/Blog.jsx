@@ -1,9 +1,18 @@
 import React from 'react';
+import Pdf from "react-to-pdf";
+const ref = React.createRef();
+
+
 
 const Blog = () => {
+
     return (
-        <div className='my-container border mt-10'>
-            <h1 className='font-bold text-center text-5xl mb-10'>BlogQuestion</h1>
+        <div className="my-container border mt-10">
+        <Pdf targetRef={ref} filename="code-example.pdf">
+          {({ toPdf }) => <button className='btn' onClick={toPdf}>Generate Pdf</button>}
+        </Pdf>
+        <div ref={ref}>
+        <h1 className='font-bold text-center text-5xl mb-10'>BlogQuestion</h1>
             <div className='border p-4 mb-3'>
                 <h3 className='text-2xl'>I. Tell us the differences between uncontrolled and controlled components.</h3>
                 <p>In React, there are two ways to handle form inputs: uncontrolled components and controlled components.</p>
@@ -40,10 +49,8 @@ const Blog = () => {
                 <p>The React library defines a set of guidelines for creating custom hooks. A custom hook's name must begin with 'use,' and it must use other hooks internally to access React's built-in features. Custom hooks, like standard functions, can accept parameters and return values.
                 </p>
             </div>
-
-
-
         </div>
+      </div>
     );
 };
 

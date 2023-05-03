@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Rating } from '@smastrom/react-rating'
 import { useLoaderData, useParams } from 'react-router-dom';
 import '@smastrom/react-rating/style.css';
+// import { toast } from 'react-toastify';
+// import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 
@@ -19,14 +22,16 @@ const ServiceDetails = () => {
             .then(data => setChef(data))
     }, [])
 
-
+    const notify = () => toast("Favourite added");
 
     return (
+
         <div className='my-container'>
-                        <div className="carousel w-full">
+            <ToastContainer></ToastContainer>
+            <div className="carousel w-full">
                 <div id="slide1" className="carousel-item relative w-full">
                     <img src={chef.img} className="w-full" />
-                    
+
                 </div>
             </div>
 
@@ -60,10 +65,12 @@ const ServiceDetails = () => {
                             <div className="card-actions justify-center">
                                 <Rating style={{ maxWidth: 150 }} value={Math.round(recipe.rating?.number || 0)} readOnly></Rating>
                                 <span className='text-1xl'>Rating:{recipe.rating?.number}</span>
-                                <button className='btn bg-red-600'>Add To Favourite</button>
+                                {/* <button onClick={notify} disabled={toast.isActive("Favourite added")} className='btn bg-red-600'>Add To Favourite</button> */}
+                                <button onClick={notify} disabled={toast.isActive("Favourite added")} className='btn bg-red-600'>Add To Favourite</button>
                             </div>
                         </div>
                     </div>)
+
                 }
             </div>
         </div>
