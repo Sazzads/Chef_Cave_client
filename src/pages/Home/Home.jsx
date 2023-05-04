@@ -59,7 +59,9 @@ const Home = () => {
                 </div>
             </div>
             {/* second section  */}
+            <div className=''>
             <Services></Services>
+            </div>
 
             {/* contact us section  */}
             <section className=" py-12">
