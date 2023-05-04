@@ -12,8 +12,17 @@ const ServiceDetails = () => {
     const { id } = useParams()
     const foodrecipe = useLoaderData()
     const [chef, setChef] = useState('')
+    const [favorites, setFavorites] = useState([]);
+    const addToFavorites = (id) => {
+        if (favorites.includes(id)) {
+          toast.error('Already added to favorites!');
+        } else {
+          setFavorites([...favorites, id]);
+          toast.success('Added to favorite Recipe!');
+        }
+      };
 
-    const { rating } = chef
+    // const { rating } = chef
 
 
     useEffect(() => {
@@ -22,7 +31,7 @@ const ServiceDetails = () => {
             .then(data => setChef(data))
     }, [])
 
-    const notify = () => toast("Favourite added");
+    // const notify = () => toast("Favourite added");
 
     return (
 
@@ -66,7 +75,7 @@ const ServiceDetails = () => {
                                 <Rating style={{ maxWidth: 150 }} value={Math.round(recipe.rating?.number || 0)} readOnly></Rating>
                                 <span className='text-1xl'>Rating:{recipe.rating?.number}</span>
                                 {/* <button onClick={notify} disabled={toast.isActive("Favourite added")} className='btn bg-red-600'>Add To Favourite</button> */}
-                                <button onClick={notify} disabled={toast.isActive("Favourite added")} className='btn bg-red-600'>Add To Favourite</button>
+                                <button onClick={()=>{addToFavorites(recipe.food_id)}}  disabled={favorites.includes(recipe.food_id)}  className='btn bg-yellow-400 text-black'>Add To Favourite</button>
                             </div>
                         </div>
                     </div>)

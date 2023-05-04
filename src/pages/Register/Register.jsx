@@ -4,7 +4,7 @@ import { AuthContext } from '../../providers/AuthProvider';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
 
 const Register = () => {
-    const { creteUser, createUserGoogle, createUserGit, updateUserProfile } = useContext(AuthContext)
+    const { creteUser, createUserGoogle, createUserGit, updateUserProfile,done } = useContext(AuthContext)
     const [error, setError] = useState("")
     const [success, setSuccess] = useState("")
 
@@ -17,7 +17,7 @@ const Register = () => {
         const photo = form.photo.value;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(name, photo, email, password);
+        // console.log(name, photo, email, password);
 
         if (password.length < 6) {
             setError('Please add at least 6 cherecters');
@@ -30,19 +30,16 @@ const Register = () => {
                 console.log(createdUser);
                 setError('')
                 event.target.reset();
-                setSuccess("REGISTER COMPLETE SUCCESSFULLY");
                 // updateUserdata(result.user,name,photo)
+                setSuccess("REGISTER COMPLETE SUCCESSFULLY");
                 updateUserProfile(name,photo)
+                
             })
             .catch(error => {
                 console.log(error);
                 setError(error.message);
                 setSuccess('')
             })
-
-
-
-
 
     };
 
@@ -73,7 +70,8 @@ const Register = () => {
     }
     return (
         <div>
-            <h1 className=' text-green-700 text-center font-bold text-3xl my-4'>{success}</h1>
+            {/* <h1 className=' text-green-700 text-center font-bold text-3xl my-4'>{success}</h1> */}
+            <h1 className=' text-green-700 text-center font-bold text-3xl my-4'> {done}</h1>
             <form className="max-w-sm mx-auto mt-8 " onSubmit={handleRegister}>
                 <h2 className='text-3xl mb-5'>Please register</h2>
                 <div className="mb-4">
@@ -130,7 +128,7 @@ const Register = () => {
                 <div className="flex items-center justify-between">
                     <button
                         type="submit"
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        className="mb-3 inline-flex justify-center py-2 px-4 rounded-md bg-yellow-500 border-0 hover:bg-black hover:text-white text-black"
                     >
                         Register
                     </button>

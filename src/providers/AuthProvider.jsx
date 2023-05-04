@@ -9,7 +9,7 @@ const gitProvider = new GithubAuthProvider();
 
 
 const AuthProvider = ({ children }) => {
-
+const [done,setDone]=useState('')
 
     const [user, setUser] = useState(null);
 
@@ -24,6 +24,7 @@ const AuthProvider = ({ children }) => {
             photoURL: photo
         }).then(() => {
             console.log("Profile updated successfully.");
+            setDone("REGISTER COMPLETE SUCCESSFULLY");
         }).catch((error) => {
             console.log("Error updating profile: ", error);
         });
@@ -70,6 +71,7 @@ const AuthProvider = ({ children }) => {
     const authInfo = {
         user,
         loading,
+        done,
         creteUser,
         signIn,
         logOut,

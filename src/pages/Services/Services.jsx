@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import LazyLoad from 'react-lazy-load';
+import { AuthContext } from '../../providers/AuthProvider';
 
 
 const Services = () => {
@@ -10,6 +11,11 @@ const Services = () => {
         .then(res => res.json())
         .then(data => setChefData(data))
     // console.log(chefData);
+
+    const { loading } = useContext(AuthContext);
+    if (loading) {
+        return <div className='max-w-sm mx-auto '><div className="radial-progress text-primary " style={{ "--value": 100 }}>100%</div></div>
+    }
     return (
         <div className='my-container'>
             <h2 className='text-center text-4xl mb-1 font-bold'>Chefs Details </h2>
@@ -17,7 +23,7 @@ const Services = () => {
             <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
                 {
                     chefData.map(chef => <div key={chef.id} className="card w-96 bg-base-100 shadow-xl hover:bg-gray-500">
-                
+
                         <figure><LazyLoad threshold={0.55}><img src={chef.img} alt="chef" /></LazyLoad></figure>
                         <div className="card-body">
                             <h2 className="card-title">
@@ -34,9 +40,6 @@ const Services = () => {
                     )
                 }
             </div>
-
-
-
         </div>
     );
 };
