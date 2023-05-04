@@ -15,6 +15,7 @@ const Login = () => {
     const from = location.state?.from?.pathname || '/';
 
     const [error, setError] = useState("")
+    const [errorAuth, setErrorAuth] = useState("")
 
     const handleLogin = (event) => {
         event.preventDefault();
@@ -37,7 +38,9 @@ const Login = () => {
             })
             .catch(error => {
                 console.log(error.message);
-                setError(error.message)
+                setErrorAuth(error.message);
+                return;
+                
             })
     }
 
@@ -70,6 +73,7 @@ const Login = () => {
     }
     return (
         <div>
+
             <form onSubmit={handleLogin} className="max-w-sm mx-auto mt-8" >
                 <h2 className='text-3xl mb-5'>Please  Login</h2>
 
@@ -98,6 +102,7 @@ const Login = () => {
                     />
                 </div>
                 <p className=' text-red-700 mb-4'>{error}</p>
+                <p className=' text-red-700 mb-4'>{errorAuth}</p>
                 <div className="flex items-center justify-between">
                     <button
                         type="submit"
