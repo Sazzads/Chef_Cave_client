@@ -24,7 +24,7 @@ const Menubar = () => {
                         <li><NavLink to="/blog">Blog</NavLink></li>
                     </ul>
                 </div>
-                <Link to='/' className="btn btn-ghost normal-case text-4xl">FooD Cave</Link>
+                <Link to='/npm run dev' className="btn btn-ghost normal-case text-xl sm:text-4xl">FooD Cave</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">

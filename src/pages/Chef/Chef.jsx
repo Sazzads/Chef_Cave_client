@@ -32,7 +32,7 @@ const Services = () => {
                             <p>{chef.experience} Expericence</p>
                             <p>{chef.recipeNumber} Recipies</p>
                             <div className="card-actions justify-end">
-                                <Link to={`/servicedetails/${chef.id}`} className="btn bg-yellow-400 text-black hover:text-white">View Recipies</Link>
+                                <Link to={`/chefdetails/${chef.id}`} className="btn bg-yellow-400 text-black hover:text-white">View Recipies</Link>
                             </div>
                         </div>
                     </div>
