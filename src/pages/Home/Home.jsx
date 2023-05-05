@@ -13,8 +13,8 @@ const Home = () => {
                 <div id="slide1" className="carousel-item relative w-full">
                     <img src={coverPic} className="w-full" />
                     <div className="absolute flex flex-col justify-between transform -translate-y-1/2 left-10 right-14  top-1/2">
-                        <p className='text-black md:text-7xl sm:text-5xl font-mono font-semibold'>Family Favourite </p>
-                        <p className='text-black md:text-7xl sm:text-5xl mb-5 font-mono font-semibold'>Recipes </p>
+                        <p className='text-black md:text-7xl sm:text-3xl font-mono font-semibold'>Family Favourite </p>
+                        <p className='text-black md:text-7xl sm:text-3xl mb-5 font-mono font-semibold'>Recipes </p>
                         <p className='text-black md:text-3xl sm:text-xl mb-5 font-mono font-semibold' >This site is a little different in that it concentrates on hearty home-style cooking rather than fancy exotic dishes or complicated techniques.</p>
                         <button className='btn w-1/4 bg-yellow-500 border-0 hover:bg-black hover:text-white text-black mb-5'>Explore More</button>
 

@@ -27,7 +27,7 @@ const Services = () => {
                         <div className="card-body p-4">
                             <h2 className="card-title">
                                 {chef.name}
-                                <div className="badge badge-secondary w-96">{chef.Likes} likes</div>
+                                <div className="badge badge-secondary w-50">{chef.Likes} likes</div>
                             </h2>
                             <p>{chef.experience} Expericence</p>
                             <p>{chef.recipeNumber} Recipies</p>

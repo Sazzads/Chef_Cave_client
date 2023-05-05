@@ -58,7 +58,7 @@ const ServiceDetails = () => {
             <div className='grid grid-cols-1 md:grid-cols-3 '>
 
                 {
-                    foodrecipe.map(recipe => <div key={recipe.food_id} className="card w-96 bg-neutral text-neutral-content m-4">
+                    foodrecipe.map(recipe => <div key={recipe.food_id} className="card w-100 bg-neutral text-neutral-content m-4 ">
                         <div className="card-body items-center text-center">
                             <h2 className="card-title">{recipe.name}</h2>
                             <div>
@@ -69,12 +69,12 @@ const ServiceDetails = () => {
                                 <p>{recipe.ingredients.d}</p>
                                 <p>{recipe.ingredients.e}</p>
                             </div>
-                            <p>{recipe.cookingMethod}</p>
+                            <p className='text-justify'>{recipe.cookingMethod}</p>
 
                             <div className="card-actions justify-center">
                                 <Rating style={{ maxWidth: 150 }} value={Math.round(recipe.rating?.number || 0)} readOnly></Rating>
                                 <span className='text-1xl'>Rating:{recipe.rating?.number}</span>
-                                {/* <button onClick={notify} disabled={toast.isActive("Favourite added")} className='btn bg-red-600'>Add To Favourite</button> */}
+                               
                                 <button onClick={()=>{addToFavorites(recipe.food_id)}}  disabled={favorites.includes(recipe.food_id)}  className='btn bg-yellow-400 text-black'>Add To Favourite</button>
                             </div>
                         </div>

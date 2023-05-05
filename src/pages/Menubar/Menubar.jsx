@@ -24,7 +24,7 @@ const Menubar = () => {
                         <li><NavLink to="/blog">Blog</NavLink></li>
                     </ul>
                 </div>
-                <a className="btn btn-ghost normal-case text-4xl">FooD Cave</a>
+                <Link to='/' className="btn btn-ghost normal-case text-4xl">FooD Cave</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -32,21 +32,21 @@ const Menubar = () => {
                     <li><NavLink to="/blog">Blog</NavLink></li>
                 </ul>
             </div>
-            <div className="navbar-end">
-                {/* <p>{user?.displayName}</p> */}
+            <div className="navbar-end ">
+               
 
                 {!user &&
                     <NavLink to='/register' className="btn me-1">Register</NavLink>
                 }
                 {user ?
-                    <NavLink onClick={handleLogOut} className="btn me-1">LogOut</NavLink> :
+                    <NavLink onClick={handleLogOut} className="btn  me-1">LogOut</NavLink> :
                     <NavLink to='/login' className="btn me-1">Login</NavLink>
                 }
 
                 {user &&
-                    <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                        <div className="w-10 rounded-full">
-                            <img src={user?.photoURL} title={user?.displayName} />
+                    <label tabIndex={0} className="btn btn-ghost btn-circle avatar tooltip tooltip-left " data-tip={user?.displayName}>
+                        <div className="w-10 rounded-full "> 
+                            <img className='w-full' src={user?.photoURL} />
                         </div>
                     </label>
                 }
