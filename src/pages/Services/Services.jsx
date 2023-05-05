@@ -22,12 +22,12 @@ const Services = () => {
             <p className='text-center mb-10 '>They are the most popular chefs of bangladesh</p>
             <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
                 {
-                    chefData.map(chef => <div key={chef.id} className="card w-90 bg-base-100 shadow-xl hover:bg-gray-500">
+                    chefData.map(chef => <div key={chef.id} className="card w-100 bg-base-100 shadow-xl hover:bg-gray-500">
                         <figure><LazyLoad threshold={0.55}><img src={chef.img} alt="chef" /></LazyLoad></figure>
                         <div className="card-body p-4">
                             <h2 className="card-title">
                                 {chef.name}
-                                <div className="badge badge-secondary">{chef.Likes} likes</div>
+                                <div className="badge badge-secondary w-96">{chef.Likes} likes</div>
                             </h2>
                             <p>{chef.experience} Expericence</p>
                             <p>{chef.recipeNumber} Recipies</p>
