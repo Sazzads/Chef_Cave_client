@@ -7,7 +7,7 @@ import { AuthContext } from '../../providers/AuthProvider';
 const Services = () => {
     const [chefData, setChefData] = useState([])
 
-    fetch("https://server-site-pi.vercel.app/allchefs")
+    fetch("https://server-site-sazzads.vercel.app/allchefs")
         .then(res => res.json())
         .then(data => setChefData(data))
     // console.log(chefData);

@@ -26,7 +26,7 @@ const ServiceDetails = () => {
 
 
     useEffect(() => {
-        fetch(`https://server-site-pi.vercel.app/allchefs/${id}`)
+        fetch(`https://server-site-sazzads.vercel.app/allchefs/${id}`)
             .then(res => res.json())
             .then(data => setChef(data))
     }, [])
